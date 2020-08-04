@@ -14,8 +14,9 @@
             app:destination="@id/singleContactFragment"
             />
         <action
-            android:id="@+id/createNewContact"
-            app:destination="@id/newContactFragment" />
+            android:id="@+id/createContact"
+            app:destination="@id/newContactFragment"
+            />
     </fragment>
     <fragment
         android:id="@+id/singleContactFragment"
@@ -27,5 +28,6 @@
         android:name="com.tkdev.nuomaddressbook.views.NewContactFragment"
         android:label="NewContactFragment"
         tools:layout="@layout/fragment_new_contact" />
+
 
 </navigation>

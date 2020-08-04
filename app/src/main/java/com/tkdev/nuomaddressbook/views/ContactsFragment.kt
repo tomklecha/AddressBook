@@ -44,7 +44,7 @@ class ContactsFragment : Fragment(), ContactsAdapter.Listener {
         }
 
         root.createContact.setOnClickListener {
-            findNavController().navigate(R.id.createNewContact)
+            findNavController().navigate(R.id.newContactFragment)
         }
 //
         return root

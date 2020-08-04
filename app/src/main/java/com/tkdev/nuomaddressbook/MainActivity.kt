@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
             setOf(
                 R.id.contactsFragment,
                 R.id.singleContactFragment,
-                R.id.createNewContact
+                R.id.newContactFragment
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
