@@ -8,7 +8,7 @@ import androidx.room.Query
 @Dao
 interface ContactDao {
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(contact: Contact)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

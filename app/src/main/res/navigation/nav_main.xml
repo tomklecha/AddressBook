@@ -13,11 +13,19 @@
             android:id="@+id/openCurrentContact"
             app:destination="@id/singleContactFragment"
             />
+        <action
+            android:id="@+id/createNewContact"
+            app:destination="@id/newContactFragment" />
     </fragment>
     <fragment
         android:id="@+id/singleContactFragment"
         android:name="com.tkdev.nuomaddressbook.views.SingleContactFragment"
         android:label="SingleContactFragment"
         tools:layout="@layout/fragment_single_contact" />
+    <fragment
+        android:id="@+id/newContactFragment"
+        android:name="com.tkdev.nuomaddressbook.views.NewContactFragment"
+        android:label="NewContactFragment"
+        tools:layout="@layout/fragment_new_contact" />
 
 </navigation>
