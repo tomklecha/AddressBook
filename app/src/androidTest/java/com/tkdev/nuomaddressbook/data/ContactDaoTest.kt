@@ -1,19 +1,16 @@
-package com.tkdev.nuomaddressbook
+package com.tkdev.nuomaddressbook.data
 
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.tkdev.nuomaddressbook.data.Contact
-import com.tkdev.nuomaddressbook.data.ContactDao
-import com.tkdev.nuomaddressbook.data.ContactDatabase
+import com.tkdev.nuomaddressbook.utilities.testContact
+import com.tkdev.nuomaddressbook.utilities.testedContacts
 import junit.framework.Assert.assertEquals
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
-class ContactDatabaseTest {
+class ContactDaoTest {
 
     private lateinit var contactDatabase: ContactDatabase
     private lateinit var contactDao: ContactDao
@@ -25,10 +22,15 @@ class ContactDatabaseTest {
         contactDao = contactDatabase.contactDao()
     }
 
+    @After
+    fun closeDb() {
+        contactDatabase.close()
+    }
+
     @Test
     fun insertContact() {
         //GIVEN
-        val contact = Contact("Tom", "Klecha", "Tom@gmail.com", "07446", "Poland")
+        val contact = testContact
         val expected = 1
 
         //WHEN
@@ -43,12 +45,7 @@ class ContactDatabaseTest {
     @Test
     fun insertListOfContacts() {
         //GIVEN
-        val contacts =
-            listOf(
-                Contact(0, "Tom", "Klecha", "Tom@gmail.com", "07446", "Poland"),
-                Contact(0, "Dom", "Roberston", "Dom@gmail.com", "654123", "UK"),
-                Contact(0, "Bob", "Burnquist", "Bob@gmail.com", "111555", "Brasil")
-            )
+        val contacts = testedContacts
         val expected = 3
 
         //WHEN
@@ -63,17 +60,12 @@ class ContactDatabaseTest {
     @Test
     fun checkContactId() {
         //GIVEN
-        val contacts =
-            listOf(
-                Contact("Tom", "Klecha", "Tom@gmail.com", "07446", "Poland"),
-                Contact("Dom", "Roberston", "Dom@gmail.com", "654123", "UK"),
-                Contact("Bob", "Burnquist", "Bob@gmail.com", "111555", "Brasil")
-            )
-        val expected = 3
+        val contacts = testedContacts
+        val expected = 2
 
         //WHEN
         contactDao.insertAll(contacts)
-        val result = contactDao.getContacts()[2].id
+        val result = contactDao.getContacts()[1].id
 
         //THEN
         assertEquals(expected, result)
@@ -83,17 +75,12 @@ class ContactDatabaseTest {
     @Test
     fun checkContactNameById() {
         //GIVEN
-        val contacts =
-            listOf(
-                Contact("Tom", "Klecha", "Tom@gmail.com", "07446", "Poland"),
-                Contact("Dom", "Roberston", "Dom@gmail.com", "654123", "UK"),
-                Contact("Bob", "Burnquist", "Bob@gmail.com", "111555", "Brasil")
-            )
+        val contacts = testedContacts
         val expected = "Bob"
-        
+
         //WHEN
         contactDao.insertAll(contacts)
-        val result = contactDao.getContacts(3).firstName
+        val result = contactDao.getContact(3).firstName
 
         //THEN
         assertEquals(expected, result)

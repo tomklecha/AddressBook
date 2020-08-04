@@ -18,5 +18,6 @@ interface ContactDao {
     fun getContacts(): List<Contact>
 
     @Query("SELECT * FROM contacts where id IS :uid")
-    fun getContacts(uid: Int): Contact
+    fun getContact(uid: Int): Contact
+
 }
