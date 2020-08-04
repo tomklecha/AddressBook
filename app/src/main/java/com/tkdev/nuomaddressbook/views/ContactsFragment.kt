@@ -2,6 +2,7 @@ package com.tkdev.nuomaddressbook.views
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -17,7 +18,7 @@ class ContactsFragment : Fragment(R.layout.fragment_contacts), ContactsAdapter.L
 
     private lateinit var contactsAdapter: ContactsAdapter
 
-    private val contactsViewModel: ContactsViewModel by viewModels {
+    private val contactsViewModel: ContactsViewModel by activityViewModels() {
         InjectorUtils.provideContactsViewModelFactory(requireContext())
     }
 
@@ -39,9 +40,8 @@ class ContactsFragment : Fragment(R.layout.fragment_contacts), ContactsAdapter.L
     }
 
     override fun onItemSelected(contactId: Int) {
-        val bundle = Bundle()
-        bundle.putInt(TextUtilities.CONTACT_ID, contactId)
-        findNavController().navigate(R.id.openCurrentContact, bundle)
+        contactsViewModel.getContact(contactId)
+        findNavController().navigate(R.id.openCurrentContact)
     }
 
 }

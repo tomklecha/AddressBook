@@ -6,6 +6,8 @@ class ContactsRepository(private val dao: ContactDao) {
 
     fun getContacts() = dao.getContacts()
 
+    fun getContact(contactId: Int) = dao.getContact(contactId)
+
     companion object {
 
         @Volatile
