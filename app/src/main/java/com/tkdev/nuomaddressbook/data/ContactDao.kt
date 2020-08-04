@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ContactDao {
@@ -15,7 +16,7 @@ interface ContactDao {
     fun insertAll(contact: List<Contact>)
 
     @Query("SELECT * FROM contacts")
-    fun getContacts(): List<Contact>
+    fun getContacts(): Flow<List<Contact>>
 
     @Query("SELECT * FROM contacts where id IS :uid")
     fun getContact(uid: Int): Contact

@@ -12,11 +12,9 @@ class ContactsViewModel(
 
     private val _contact = MutableLiveData<Contact>()
 
-    private val _contacts = MutableLiveData<List<Contact>>()
-
     val contact: LiveData<Contact> = _contact
 
-    val contacts: LiveData<List<Contact>> = _contacts
+    val contacts: LiveData<List<Contact>> = repository.getContacts().asLiveData()
 
     fun saveContact(contact: Contact) =
         viewModelScope.launch(Dispatchers.IO) {
@@ -28,9 +26,4 @@ class ContactsViewModel(
             _contact.postValue(repository.getContact(contact))
         }
 
-    init {
-        viewModelScope.launch(Dispatchers.IO) {
-            _contacts.postValue(repository.getContacts())
-        }
-    }
 }

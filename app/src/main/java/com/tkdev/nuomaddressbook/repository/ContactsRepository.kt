@@ -2,10 +2,11 @@ package com.tkdev.nuomaddressbook.repository
 
 import com.tkdev.nuomaddressbook.data.Contact
 import com.tkdev.nuomaddressbook.data.ContactDao
+import kotlinx.coroutines.flow.Flow
 
 class ContactsRepository(private val dao: ContactDao) {
 
-    fun getContacts() = dao.getContacts()
+    fun getContacts(): Flow<List<Contact>> = dao.getContacts()
 
     fun getContact(contactId: Int) = dao.getContact(contactId)
 
