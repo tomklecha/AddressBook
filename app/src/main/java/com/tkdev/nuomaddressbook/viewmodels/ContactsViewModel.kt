@@ -10,18 +10,9 @@ class ContactsViewModel(
     private val repository: ContactsRepository
 ) : ViewModel() {
 
-    private val _contact = MutableLiveData<Contact>()
-
     private val _contacts = MutableLiveData<List<Contact>>()
 
-    val contact: LiveData<Contact> = _contact.switchMap { liveData { emit(it) } }
-
     val contacts: LiveData<List<Contact>> = _contacts.switchMap { liveData { emit(it) } }
-
-    fun getContactById(contactId: Int) =
-        viewModelScope.launch(Dispatchers.IO) {
-        _contact.postValue(repository.getContact(contactId))
-    }
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
