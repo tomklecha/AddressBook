@@ -1,8 +1,9 @@
-package com.tkdev.nuomaddressbook.viewmodels
+package com.tkdev.nuomaddressbook.utilities
 
 import android.content.Context
 import com.tkdev.nuomaddressbook.data.ContactDatabase
 import com.tkdev.nuomaddressbook.repository.ContactsRepository
+import com.tkdev.nuomaddressbook.viewmodels.ContactsViewModelFactory
 
 object InjectorUtils {
 
@@ -15,7 +16,12 @@ object InjectorUtils {
     fun provideContactsViewModelFactory(
         context: Context
     ): ContactsViewModelFactory {
-        val repository = getContactsRepository(context)
-        return ContactsViewModelFactory(repository)
+        val repository =
+            getContactsRepository(
+                context
+            )
+        return ContactsViewModelFactory(
+            repository
+        )
     }
 }

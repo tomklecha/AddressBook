@@ -3,17 +3,18 @@ package com.tkdev.nuomaddressbook.data
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.tkdev.nuomaddressbook.utilities.TextUtilities
 
 @Entity(tableName = "contacts")
 data class Contact(
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id") val id: Int,
+    @ColumnInfo(name = TextUtilities.CONTACT_ID) val id: Int,
 
-    @ColumnInfo(name = "first_name") val firstName: String,
-    @ColumnInfo(name = "last_name") val lastName: String,
-    @ColumnInfo(name = "email") val email: String,
-    @ColumnInfo(name = "phone_number") val phoneNumber: String,
-    @ColumnInfo(name = "address") val address: String
+    @ColumnInfo(name = TextUtilities.CONTACT_FIRST_NAME) val firstName: String,
+    @ColumnInfo(name = TextUtilities.CONTACT_LAST_NAME) val lastName: String,
+    @ColumnInfo(name = TextUtilities.CONTACT_EMAIL) val email: String,
+    @ColumnInfo(name = TextUtilities.CONTACT_PHONE_NUMBER) val phoneNumber: String,
+    @ColumnInfo(name = TextUtilities.CONTACT_ADDRESS) val address: String
 ) {
     constructor(
         firstName: String,

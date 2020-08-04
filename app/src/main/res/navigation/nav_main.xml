@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/contactsFragment">
+    <fragment
+        android:id="@+id/contactsFragment"
+        android:name="com.tkdev.nuomaddressbook.views.ContactsFragment"
+        android:label="ContactsFragment"
+        tools:layout="@layout/fragment_contacts" >
+        <action
+            android:id="@+id/openCurrentContact"
+            app:destination="@id/singleContactFragment"
+            />
+        <action
+            android:id="@+id/createContact"
+            app:destination="@id/newContactFragment"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/singleContactFragment"
+        android:name="com.tkdev.nuomaddressbook.views.SingleContactFragment"
+        android:label="SingleContactFragment"
+        tools:layout="@layout/fragment_single_contact" />
+    <fragment
+        android:id="@+id/newContactFragment"
+        android:name="com.tkdev.nuomaddressbook.views.NewContactFragment"
+        android:label="NewContactFragment"
+        tools:layout="@layout/fragment_new_contact" />
+
+
+</navigation>
