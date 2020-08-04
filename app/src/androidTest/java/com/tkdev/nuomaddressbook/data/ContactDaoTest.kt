@@ -6,6 +6,7 @@ import androidx.test.core.app.ApplicationProvider
 import com.tkdev.nuomaddressbook.utilities.testContact
 import com.tkdev.nuomaddressbook.utilities.testedContacts
 import junit.framework.Assert.assertEquals
+import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -73,7 +74,7 @@ class ContactDaoTest {
     }
 
     @Test
-    fun checkContactNameById() {
+    fun checkContactNameById() = runBlocking {
         //GIVEN
         val contacts = testedContacts
         val expected = "Bob"
