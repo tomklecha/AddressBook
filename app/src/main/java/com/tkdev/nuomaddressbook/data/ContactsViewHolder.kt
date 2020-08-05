@@ -9,7 +9,6 @@ class ContactsViewHolder(
     private val itemListener: ContactsAdapter.ItemListener
 ) : RecyclerView.ViewHolder(binding.root) {
 
-
     fun bind(contact: Contact) {
         binding.setClickListener {
             itemListener.onItemClickListener(contact.id)

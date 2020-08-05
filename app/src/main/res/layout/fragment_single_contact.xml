@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -21,37 +20,71 @@
 
         <TextView
             android:id="@+id/singleContactFirstName"
+            style="@style/TextAppearance.AppCompat.Headline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="start"
+            android:hint="@string/first_name"
+            android:padding="4dp"
             android:text="@{viewModel.contact.firstName}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+            android:textSize="16sp"
             tools:text="singleContactFirstName" />
 
         <TextView
             android:id="@+id/singleContactLastName"
-            android:layout_width="match_parent"
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="start"
+            android:hint="@string/last_name"
+            android:padding="4dp"
             android:text="@{viewModel.contact.lastName}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+            android:textSize="16sp"
             tools:text="singleContactLastName" />
 
         <TextView
             android:id="@+id/singleContactEmail"
-            android:layout_width="match_parent"
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="start"
+            android:hint="@string/email"
+            android:padding="4dp"
             android:text="@{viewModel.contact.email}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+            android:textSize="16sp"
             tools:text="singleContactEmail" />
 
         <TextView
             android:id="@+id/singleContactPhoneNumber"
-            android:layout_width="match_parent"
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="start"
+            android:hint="@string/phone_number"
+            android:padding="4dp"
             android:text="@{viewModel.contact.phoneNumber}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+            android:textSize="16sp"
             tools:text="singleContactPhoneNumber" />
 
         <TextView
             android:id="@+id/singleContactAddress"
-            android:layout_width="match_parent"
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="start"
+            android:hint="@string/address"
+            android:padding="4dp"
             android:text="@{viewModel.contact.address}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display4"
+            android:textSize="16sp"
             tools:text="singleContactAddress" />
     </LinearLayout>
 </layout>

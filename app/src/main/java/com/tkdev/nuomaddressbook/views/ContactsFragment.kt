@@ -12,9 +12,11 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tkdev.nuomaddressbook.R
 import com.tkdev.nuomaddressbook.adapters.ContactsAdapter
+import com.tkdev.nuomaddressbook.data.Contact
 import com.tkdev.nuomaddressbook.databinding.FragmentContactsBinding
 import com.tkdev.nuomaddressbook.utilities.InjectorUtils
 import com.tkdev.nuomaddressbook.viewmodels.ContactsViewModel
+import kotlinx.android.synthetic.main.fragment_contacts.*
 
 class ContactsFragment : Fragment(), ContactsAdapter.ItemListener {
 
@@ -42,7 +44,7 @@ class ContactsFragment : Fragment(), ContactsAdapter.ItemListener {
         contactsAdapter = ContactsAdapter(this)
 
         contactsViewModel.contacts.observe(viewLifecycleOwner) { list ->
-            contactsAdapter.submitList(list)
+            updateUI(list)
         }
 
         binding.contactsRecyclerView.apply {
@@ -59,6 +61,16 @@ class ContactsFragment : Fragment(), ContactsAdapter.ItemListener {
         )
 
         return binding.root
+    }
+
+    private fun updateUI(list: List<Contact>) {
+        when (list.isEmpty()) {
+            true -> imageView.visibility = View.VISIBLE
+            false -> {
+                imageView.visibility = View.INVISIBLE
+                contactsAdapter.submitList(list)
+            }
+        }
     }
 
     interface Callback {
