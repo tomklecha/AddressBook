@@ -1,9 +1,8 @@
 package com.tkdev.nuomaddressbook.views
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observe
@@ -34,11 +33,12 @@ class ContactsFragment : Fragment(), ContactsAdapter.ItemListener {
         val binding = FragmentContactsBinding
             .inflate(inflater, container, false).apply {
                 viewModel = contactsViewModel
-                callback = object : Callback {
-                    override fun createContact() {
-                        findNavController().navigate(R.id.newContactFragment)
-                    }
-                }
+//                TODO kept callback code for usage with Floating Action Button
+//                callback = object : Callback {
+//                    override fun createContact() {
+//                        findNavController().navigate(R.id.newContactFragment)
+//                    }
+//                }
             }
 
         contactsAdapter = ContactsAdapter(this)
@@ -73,14 +73,16 @@ class ContactsFragment : Fragment(), ContactsAdapter.ItemListener {
         }
     }
 
-    interface Callback {
-        fun createContact()
-    }
+//      TODO kept callback code for usage with Floating Action Button
+//    interface Callback {
+//        fun createContact()
+//    }
 
     override fun onItemClickListener(contactId: Int) {
         contactsViewModel.getContact(contactId)
         findNavController().navigate(R.id.openCurrentContact)
     }
+
 }
 
 
