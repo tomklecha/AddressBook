@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tkdev.nuomaddressbook.R
 import com.tkdev.nuomaddressbook.adapters.ContactsAdapter
@@ -31,7 +32,7 @@ class ContactsFragment : Fragment(), ContactsAdapter.ItemListener {
         val binding = FragmentContactsBinding
             .inflate(inflater, container, false).apply {
                 viewModel = contactsViewModel
-                callback = object : Callback{
+                callback = object : Callback {
                     override fun createContact() {
                         findNavController().navigate(R.id.newContactFragment)
                     }
@@ -48,7 +49,14 @@ class ContactsFragment : Fragment(), ContactsAdapter.ItemListener {
             adapter = contactsAdapter
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+
         }
+        binding.contactsRecyclerView.addItemDecoration(
+            DividerItemDecoration(
+                requireContext(),
+                LinearLayoutManager.VERTICAL
+            )
+        )
 
         return binding.root
     }

@@ -1,19 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-<data>
-    <variable
-        name="viewModel"
-        type="com.tkdev.nuomaddressbook.viewmodels.ContactsViewModel" />
-</data>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.tkdev.nuomaddressbook.viewmodels.ContactsViewModel" />
+    </data>
+
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:divider="?android:attr/dividerHorizontal"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:showDividers="middle|end">
 
         <TextView
-            android:id="@+id/singleContactName"
-            android:layout_width="wrap_content"
+            android:id="@+id/singleContactFirstName"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@{viewModel.contact.firstName}" />
+            android:text="@{viewModel.contact.firstName}"
+            tools:text="singleContactFirstName" />
+
+        <TextView
+            android:id="@+id/singleContactLastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.contact.lastName}"
+            tools:text="singleContactLastName" />
+
+        <TextView
+            android:id="@+id/singleContactEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.contact.email}"
+            tools:text="singleContactEmail" />
+
+        <TextView
+            android:id="@+id/singleContactPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.contact.phoneNumber}"
+            tools:text="singleContactPhoneNumber" />
+
+        <TextView
+            android:id="@+id/singleContactAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.contact.address}"
+            tools:text="singleContactAddress" />
     </LinearLayout>
 </layout>

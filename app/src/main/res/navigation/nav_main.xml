@@ -14,7 +14,7 @@
             app:destination="@id/singleContactFragment"
             />
         <action
-            android:id="@+id/createContact"
+            android:id="@+id/createContactButton"
             app:destination="@id/newContactFragment"
             />
     </fragment>

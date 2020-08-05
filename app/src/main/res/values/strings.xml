@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">NuomAddressBook</string>
+    <string name="contact_name">%1$s %2$s</string>
 </resources>
