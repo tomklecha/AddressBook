@@ -1,23 +1,22 @@
 package com.tkdev.nuomaddressbook.data
 
-import android.view.View
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.tkdev.nuomaddressbook.adapters.ContactsAdapter
-import kotlinx.android.synthetic.main.item_contact.view.*
+import com.tkdev.nuomaddressbook.databinding.ItemContactBinding
 
 class ContactsViewHolder(
-    itemView: View,
-    val listener: ContactsAdapter.Listener
-) : RecyclerView.ViewHolder(itemView) {
+    private val binding: ItemContactBinding,
+    private val itemListener: ContactsAdapter.ItemListener
+) : RecyclerView.ViewHolder(binding.root) {
 
-    val name: TextView = itemView.contactName
-    
-    fun setCurrent(contact: Contact){
-        itemView.setOnClickListener {
-            listener.onItemSelected(contact.id)
+
+    fun bind(contact: Contact) {
+        binding.setClickListener {
+            itemListener.onItemClickListener(contact.id)
         }
-
-        name.text = contact.firstName
+        binding.apply {
+            this.contact = contact
+            executePendingBindings()
+        }
     }
 }

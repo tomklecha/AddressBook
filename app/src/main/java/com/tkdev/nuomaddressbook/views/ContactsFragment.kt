@@ -11,11 +11,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tkdev.nuomaddressbook.R
 import com.tkdev.nuomaddressbook.adapters.ContactsAdapter
+import com.tkdev.nuomaddressbook.databinding.FragmentContactsBinding
 import com.tkdev.nuomaddressbook.utilities.InjectorUtils
 import com.tkdev.nuomaddressbook.viewmodels.ContactsViewModel
-import kotlinx.android.synthetic.main.fragment_contacts.view.*
 
-class ContactsFragment : Fragment(), ContactsAdapter.Listener {
+class ContactsFragment : Fragment(), ContactsAdapter.ItemListener {
 
     private lateinit var contactsAdapter: ContactsAdapter
 
@@ -28,33 +28,39 @@ class ContactsFragment : Fragment(), ContactsAdapter.Listener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = LayoutInflater.from(requireContext())
-            .inflate(R.layout.fragment_contacts, container, false)
+        val binding = FragmentContactsBinding
+            .inflate(inflater, container, false).apply {
+                viewModel = contactsViewModel
+                callback = object : Callback{
+                    override fun createContact() {
+                        findNavController().navigate(R.id.newContactFragment)
+                    }
+                }
+            }
 
-        contactsAdapter = ContactsAdapter(requireContext(), this)
+        contactsAdapter = ContactsAdapter(this)
 
         contactsViewModel.contacts.observe(viewLifecycleOwner) { list ->
-            contactsAdapter.setContactList(list)
+            contactsAdapter.submitList(list)
         }
 
-        root.contactsRecyclerView.apply {
+        binding.contactsRecyclerView.apply {
             adapter = contactsAdapter
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         }
 
-        root.createContact.setOnClickListener {
-            findNavController().navigate(R.id.newContactFragment)
-        }
-//
-        return root
+        return binding.root
     }
 
-    override fun onItemSelected(contactId: Int) {
+    interface Callback {
+        fun createContact()
+    }
+
+    override fun onItemClickListener(contactId: Int) {
         contactsViewModel.getContact(contactId)
         findNavController().navigate(R.id.openCurrentContact)
     }
-
 }
 
 
