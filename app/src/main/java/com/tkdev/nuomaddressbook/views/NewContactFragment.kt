@@ -9,9 +9,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.tkdev.nuomaddressbook.R
 import com.tkdev.nuomaddressbook.data.Contact
+import com.tkdev.nuomaddressbook.databinding.FragmentNewContactBinding
 import com.tkdev.nuomaddressbook.utilities.InjectorUtils
 import com.tkdev.nuomaddressbook.viewmodels.ContactsViewModel
-import kotlinx.android.synthetic.main.fragment_new_contact.*
 
 class NewContactFragment : Fragment(R.layout.fragment_new_contact) {
 
@@ -24,24 +24,21 @@ class NewContactFragment : Fragment(R.layout.fragment_new_contact) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return LayoutInflater.from(requireContext())
-            .inflate(R.layout.fragment_new_contact, container, false)
-    }
+        val binding = FragmentNewContactBinding.inflate(inflater, container, false)
 
-    override fun onStart() {
-        super.onStart()
-
-        saveButton.setOnClickListener {
+        binding.saveButton.setOnClickListener {
             contactsViewModel.saveContact(
                 Contact(
-                    newContactFirstName.text.toString(),
-                    newContactLastName.text.toString(),
-                    newContactEmail.text.toString(),
-                    newContactPhoneNumber.text.toString(),
-                    newContactAddress.text.toString()
+                    binding.newContactFirstName.text.toString(),
+                    binding.newContactLastName.text.toString(),
+                    binding.newContactEmail.text.toString(),
+                    binding.newContactPhoneNumber.text.toString(),
+                    binding.newContactAddress.text.toString()
                 )
             )
             findNavController().navigateUp()
         }
+
+        return binding.root
     }
 }
