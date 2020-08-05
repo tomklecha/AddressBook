@@ -15,7 +15,7 @@ interface ContactDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertAll(contact: List<Contact>)
 
-    @Query("SELECT * FROM contacts ORDER BY first_name ")
+    @Query("SELECT * FROM contacts ORDER BY first_name COLLATE NOCASE")
     fun getContacts(): Flow<List<Contact>>
 
     @Query("SELECT * FROM contacts where id IS :uid")
