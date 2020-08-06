@@ -9,13 +9,13 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ContactDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(contact: Contact)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertAll(contact: List<Contact>)
 
-    @Query("SELECT * FROM contacts ORDER BY first_name ")
+    @Query("SELECT * FROM contacts ORDER BY first_name COLLATE NOCASE")
     fun getContacts(): Flow<List<Contact>>
 
     @Query("SELECT * FROM contacts where id IS :uid")

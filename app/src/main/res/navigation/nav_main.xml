@@ -7,26 +7,28 @@
     <fragment
         android:id="@+id/contactsFragment"
         android:name="com.tkdev.nuomaddressbook.views.ContactsFragment"
-        android:label="ContactsFragment"
+        android:label="Nuom Contact Book"
         tools:layout="@layout/fragment_contacts" >
         <action
             android:id="@+id/openCurrentContact"
             app:destination="@id/singleContactFragment"
             />
         <action
-            android:id="@+id/createContact"
+            android:id="@+id/createContactButton"
             app:destination="@id/newContactFragment"
             />
     </fragment>
     <fragment
         android:id="@+id/singleContactFragment"
         android:name="com.tkdev.nuomaddressbook.views.SingleContactFragment"
-        android:label="SingleContactFragment"
-        tools:layout="@layout/fragment_single_contact" />
+        android:label="Highlighted Contact"
+        tools:layout="@layout/fragment_single_contact"
+        >
+    </fragment>
     <fragment
         android:id="@+id/newContactFragment"
         android:name="com.tkdev.nuomaddressbook.views.NewContactFragment"
-        android:label="NewContactFragment"
+        android:label="Add new contact"
         tools:layout="@layout/fragment_new_contact" />
 
 

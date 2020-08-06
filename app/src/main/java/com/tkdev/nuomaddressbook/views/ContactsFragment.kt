@@ -1,19 +1,21 @@
 package com.tkdev.nuomaddressbook.views
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tkdev.nuomaddressbook.R
 import com.tkdev.nuomaddressbook.adapters.ContactsAdapter
+import com.tkdev.nuomaddressbook.data.Contact
 import com.tkdev.nuomaddressbook.databinding.FragmentContactsBinding
 import com.tkdev.nuomaddressbook.utilities.InjectorUtils
 import com.tkdev.nuomaddressbook.viewmodels.ContactsViewModel
+import kotlinx.android.synthetic.main.fragment_contacts.*
 
 class ContactsFragment : Fragment(), ContactsAdapter.ItemListener {
 
@@ -31,36 +33,56 @@ class ContactsFragment : Fragment(), ContactsAdapter.ItemListener {
         val binding = FragmentContactsBinding
             .inflate(inflater, container, false).apply {
                 viewModel = contactsViewModel
-                callback = object : Callback{
-                    override fun createContact() {
-                        findNavController().navigate(R.id.newContactFragment)
-                    }
-                }
+//                TODO kept callback code for usage with Floating Action Button
+//                callback = object : Callback {
+//                    override fun createContact() {
+//                        findNavController().navigate(R.id.newContactFragment)
+//                    }
+//                }
             }
 
         contactsAdapter = ContactsAdapter(this)
 
         contactsViewModel.contacts.observe(viewLifecycleOwner) { list ->
-            contactsAdapter.submitList(list)
+            updateUI(list)
         }
 
         binding.contactsRecyclerView.apply {
             adapter = contactsAdapter
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+
         }
+        binding.contactsRecyclerView.addItemDecoration(
+            DividerItemDecoration(
+                requireContext(),
+                LinearLayoutManager.VERTICAL
+            )
+        )
 
         return binding.root
     }
 
-    interface Callback {
-        fun createContact()
+    private fun updateUI(list: List<Contact>) {
+        when (list.isEmpty()) {
+            true -> imageView.visibility = View.VISIBLE
+            false -> {
+                imageView.visibility = View.INVISIBLE
+                contactsAdapter.submitList(list)
+            }
+        }
     }
+
+//      TODO kept callback code for usage with Floating Action Button
+//    interface Callback {
+//        fun createContact()
+//    }
 
     override fun onItemClickListener(contactId: Int) {
         contactsViewModel.getContact(contactId)
         findNavController().navigate(R.id.openCurrentContact)
     }
+
 }
 
 
