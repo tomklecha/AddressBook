@@ -18,6 +18,9 @@ interface ContactDao {
     @Query("SELECT * FROM contacts ORDER BY first_name COLLATE NOCASE")
     fun getContacts(): Flow<List<Contact>>
 
+    @Query("SELECT * FROM contacts WHERE first_name LIKE  '%' ||:search || '%'  OR last_name LIKE  '%' ||:search || '%'ORDER BY first_name COLLATE NOCASE")
+    fun getSearchContacts(search: String?): List<Contact>
+
     @Query("SELECT * FROM contacts where id IS :uid")
     fun getContact(uid: Int): Contact
 
