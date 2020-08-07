@@ -1,5 +1,6 @@
 package com.tkdev.nuomaddressbook.viewmodels
 
+import android.util.MutableDouble
 import androidx.lifecycle.*
 import com.tkdev.nuomaddressbook.data.Contact
 import com.tkdev.nuomaddressbook.repository.ContactsRepository
@@ -14,9 +15,13 @@ class ContactsViewModel(
 
     private val _searchContacts = MutableLiveData<List<Contact>>()
 
+    private val _emptyListVisibility = MutableLiveData<Boolean>()
+
     val contact: LiveData<Contact> = _contact
 
     val searchContacts: LiveData<List<Contact>> = _searchContacts
+
+    val emptyListVisibility = _emptyListVisibility
 
     val contacts: LiveData<List<Contact>> = repository.getContacts().asLiveData()
 
@@ -29,5 +34,11 @@ class ContactsViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             _contact.postValue(repository.getContact(contact))
         }
+
+    fun emptyListVisibility(emptyList: Boolean){
+        _emptyListVisibility.value = emptyList
+    }
+
+
 
 }

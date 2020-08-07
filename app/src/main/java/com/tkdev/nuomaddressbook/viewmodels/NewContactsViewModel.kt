@@ -181,7 +181,6 @@ class NewContactsViewModel(
         }
 
     init {
-        _validContact.value = false
         validateValue(channel)
     }
 }

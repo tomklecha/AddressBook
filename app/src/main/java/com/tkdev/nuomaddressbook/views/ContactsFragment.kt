@@ -18,7 +18,6 @@ import com.tkdev.nuomaddressbook.data.Contact
 import com.tkdev.nuomaddressbook.databinding.FragmentContactsBinding
 import com.tkdev.nuomaddressbook.utilities.InjectorUtils
 import com.tkdev.nuomaddressbook.viewmodels.ContactsViewModel
-import kotlinx.android.synthetic.main.fragment_contacts.*
 
 class ContactsFragment : Fragment(), ContactsAdapter.ItemListener {
 
@@ -73,14 +72,11 @@ class ContactsFragment : Fragment(), ContactsAdapter.ItemListener {
     }
 
     private fun updateUI(list: List<Contact>) {
-        when (list.isEmpty()) {
-            true -> {
-                imageView.visibility = View.VISIBLE
-                contactsRecyclerView.visibility = View.INVISIBLE
-            }
+        when (val result = list.isEmpty()) {
+            true ->
+                contactsViewModel.emptyListVisibility(result)
             false -> {
-                imageView.visibility = View.INVISIBLE
-                contactsRecyclerView.visibility = View.VISIBLE
+                contactsViewModel.emptyListVisibility(result)
                 contactsAdapter.submitList(list)
             }
         }
@@ -94,12 +90,12 @@ class ContactsFragment : Fragment(), ContactsAdapter.ItemListener {
         val searchItem = menu.findItem(R.id.app_bar_search)
         val searchMenu = searchItem.actionView as SearchView
         searchMenu.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(p0: String?): Boolean {
+            override fun onQueryTextSubmit(request: String?): Boolean {
                 return false
             }
 
-            override fun onQueryTextChange(p0: String?): Boolean {
-                contactsViewModel.getSearchContacts(p0)
+            override fun onQueryTextChange(request: String?): Boolean {
+                contactsViewModel.getSearchContacts(request)
                 contactsViewModel.searchContacts.observe(viewLifecycleOwner) {
                     updateUI(it)
                 }
