@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="callback"
+            type="com.tkdev.nuomaddressbook.views.NewContactFragment.Callback" />
+        <variable
+            name="viewModel"
+            type="com.tkdev.nuomaddressbook.viewmodels.NewContactsViewModel" />
+    </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:layout_height="match_parent">
 
         <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -17,8 +27,10 @@
                 android:orientation="vertical">
 
                 <com.google.android.material.textfield.TextInputLayout
+                    setError="@{viewModel.firstNameError}"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:errorEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/newContactFirstName"
@@ -28,8 +40,10 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    setError="@{viewModel.lastNameError}"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:errorEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/newContactLastName"
@@ -39,8 +53,10 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    setError="@{viewModel.emailError}"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:errorEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/newContactEmail"
@@ -50,8 +66,10 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    setError="@{viewModel.phoneNumberError}"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:errorEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/newContactPhoneNumber"
@@ -62,8 +80,10 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    setError="@{viewModel.addressError}"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:errorEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/newContactAddress"
@@ -72,16 +92,17 @@
                         android:hint="@string/address" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <Button
+                    android:id="@+id/saveButton"
+                    enableSaveContact="@{viewModel.validContact}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:padding="16dp"
+                    android:onClick="@{() -> callback.saveContact()}"
+                    android:text="@string/save_contact" />
 
             </LinearLayout>
         </ScrollView>
-
-        <Button
-            android:id="@+id/saveButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:padding="16dp"
-            android:text="@string/save_contact" />
-    </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

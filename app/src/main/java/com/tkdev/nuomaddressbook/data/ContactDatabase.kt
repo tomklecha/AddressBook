@@ -26,7 +26,7 @@ abstract class ContactDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     ContactDatabase::class.java,
-                    TextUtilities.CONTACT_DATABASE
+                    TextUtilities.CONTACT_DATABASE_NAME
                 )
                     .build()
                 INSTANCE = instance

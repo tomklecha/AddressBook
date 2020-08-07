@@ -10,8 +10,6 @@ class ContactsRepository(private val dao: ContactDao) {
 
     fun getContact(contactId: Int) = dao.getContact(contactId)
 
-    fun saveContact(contact: Contact) = dao.insert(contact)
-
     companion object {
 
         @Volatile
