@@ -1,8 +1,9 @@
 package com.tkdev.nuomaddressbook.views
 
 import android.os.Bundle
-import android.view.*
-import android.widget.Toast
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observe
@@ -33,6 +34,7 @@ class ContactsFragment : Fragment(), ContactsAdapter.ItemListener {
         val binding = FragmentContactsBinding
             .inflate(inflater, container, false).apply {
                 viewModel = contactsViewModel
+                lifecycleOwner = viewLifecycleOwner
 //                TODO kept callback code for usage with Floating Action Button
 //                callback = object : Callback {
 //                    override fun createContact() {

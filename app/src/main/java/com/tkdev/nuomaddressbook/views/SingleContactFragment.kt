@@ -14,7 +14,7 @@ import com.tkdev.nuomaddressbook.viewmodels.ContactsViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.view.*
 
-class SingleContactFragment() : Fragment(R.layout.fragment_single_contact) {
+class SingleContactFragment() : Fragment() {
 
     private val contactsViewModel: ContactsViewModel by activityViewModels {
         InjectorUtils.provideContactsViewModelFactory(requireContext())

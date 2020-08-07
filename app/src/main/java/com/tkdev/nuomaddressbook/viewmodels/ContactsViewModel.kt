@@ -16,11 +16,6 @@ class ContactsViewModel(
 
     val contacts: LiveData<List<Contact>> = repository.getContacts().asLiveData()
 
-    fun saveContact(contact: Contact) =
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.saveContact(contact)
-        }
-
     fun getContact(contact: Int) =
         viewModelScope.launch(Dispatchers.IO) {
             _contact.postValue(repository.getContact(contact))
