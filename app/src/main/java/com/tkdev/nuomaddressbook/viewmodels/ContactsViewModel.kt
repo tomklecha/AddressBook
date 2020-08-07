@@ -12,9 +12,18 @@ class ContactsViewModel(
 
     private val _contact = MutableLiveData<Contact>()
 
+    private val _searchContacts = MutableLiveData<List<Contact>>()
+
     val contact: LiveData<Contact> = _contact
 
+    val searchContacts: LiveData<List<Contact>> = _searchContacts
+
     val contacts: LiveData<List<Contact>> = repository.getContacts().asLiveData()
+
+    fun getSearchContacts(search: String?)=
+        viewModelScope.launch(Dispatchers.IO) {
+            _searchContacts.postValue(repository.getSearchContacts(search))
+        }
 
     fun getContact(contact: Int) =
         viewModelScope.launch(Dispatchers.IO) {

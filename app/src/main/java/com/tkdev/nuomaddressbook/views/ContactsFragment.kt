@@ -2,8 +2,10 @@ package com.tkdev.nuomaddressbook.views
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observe
@@ -24,6 +26,11 @@ class ContactsFragment : Fragment(), ContactsAdapter.ItemListener {
 
     private val contactsViewModel: ContactsViewModel by activityViewModels {
         InjectorUtils.provideContactsViewModelFactory(requireContext())
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -67,18 +74,40 @@ class ContactsFragment : Fragment(), ContactsAdapter.ItemListener {
 
     private fun updateUI(list: List<Contact>) {
         when (list.isEmpty()) {
-            true -> imageView.visibility = View.VISIBLE
+            true -> {
+                imageView.visibility = View.VISIBLE
+                contactsRecyclerView.visibility = View.INVISIBLE
+            }
             false -> {
                 imageView.visibility = View.INVISIBLE
+                contactsRecyclerView.visibility = View.VISIBLE
                 contactsAdapter.submitList(list)
             }
         }
     }
 
-//      TODO kept callback code for usage with Floating Action Button
+    //      TODO kept callback code for usage with Floating Action Button
 //    interface Callback {
 //        fun createContact()
 //    }
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        val searchItem = menu.findItem(R.id.app_bar_search)
+        val searchMenu = searchItem.actionView as SearchView
+        searchMenu.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                contactsViewModel.getSearchContacts(p0)
+                contactsViewModel.searchContacts.observe(viewLifecycleOwner) {
+                    updateUI(it)
+                }
+                return true
+            }
+        })
+        super.onPrepareOptionsMenu(menu)
+    }
 
     override fun onItemClickListener(contactId: Int) {
         contactsViewModel.getContact(contactId)
