@@ -1,16 +1,16 @@
 # NuomAddressBook
 
 Sample contact book application created as a test task.
-Application shows empty contact list with a place holder. Addinig new contact require input of for neccesary contact data:
+Application shows empty contact list with a place holder. Adding new contact requires input of the following neccesary contact data:
 - first name,
 - last name,
 - email,
 - phone number.
 
 This data must be valid before save option is available, 
-address input is optional, but it require to be empty, or without special characters.
-Added contact is highlighted in the list and with the click we can see all data about the contact.
-Also we can search for a contact with search bar, by letters of first name or last name.
+address input is optional and can be left blank but it cannot contain special characters.
+Added contact is highlighted in the list and by clicking one can see all the contact data.
+Also we can search for a contact with search bar, via letters included in either first or last name.
 Contacts are sorted ascending within the list.
 
 # Technology
@@ -22,13 +22,9 @@ Contacts are sorted ascending within the list.
 
 # Comments
 
-- Technology used for observing data was Android's Live Data. Since lack of knowledge of RXjava,
-i delivered the application in technology, I felt more familliar with.
-With more time to study, I would definitely try RXJava.
-For the scale of the project, LiveData usage is enough.
-Obviously
+- Technology used for observing data was Android's Live Data. 
+I have used this technology as it is the one I am most proficient in.
 
-- With testing the application, i don't have much experience within androidTest,
-so the tests attached are more concentrated on validation of inputs of contact.
-I would like to work on it more in future, as TDD development is a very
-good way of developing apps.
+- Regarding testing the application, the tests attached are more concentrated on validation of inputs of contact.
+I am committed to expand my knowledge of TDD in the near future, as I believe is an excellent way of developing apps.
+AndroidTests at the beginning were performed without LiveData, that is why some might not be working.
