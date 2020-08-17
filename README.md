@@ -1,4 +1,4 @@
-# NuomAddressBook
+# AddressBook
 
 Sample contact book application created as a test task.
 Application shows empty contact list with a place holder. Adding new contact requires input of the following neccesary contact data:
@@ -19,12 +19,3 @@ Contacts are sorted ascending within the list.
 - Structure - MVVM using LiveData
 - Jetpack components - Room (persistance layer), Navigation
 - Testing - JUnit, Mockk
-
-# Comments
-
-- Technology used for observing data was Android's Live Data. 
-I have used this technology as it is the one I am most proficient in.
-
-- Regarding testing the application, the tests attached are more concentrated on validation of inputs of contact.
-I am committed to expand my knowledge of TDD in the near future, as I believe is an excellent way of developing apps.
-AndroidTests at the beginning were performed without LiveData, that is why some might not be working.
